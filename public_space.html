@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Space</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Share Your Content</h1>
+    <form id="contentForm">
+        <textarea id="contentInput" placeholder="Share your thoughts, images, or videos..." required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="contentDisplay"></div>
+    <script>
+        const abusiveWords = ['badword1', 'badword2']; // Add more words as needed
+
+        document.getElementById('contentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const content = document.getElementById('contentInput').value;
+            if (containsAbusiveWords(content)) {
+                alert('Your content contains abusive language and cannot be submitted.');
+            } else {
+                displayContent(content);
+                document.getElementById('contentInput').value = '';
+            }
+        });
+
+        function containsAbusiveWords(content) {
+            return abusiveWords.some(word => content.includes(word));
+        }
+
+        function displayContent(content) {
+            const contentDisplay = document.getElementById('contentDisplay');
+            const newContent = document.createElement('div');
+            newContent.textContent = content;
+            contentDisplay.appendChild(newContent);
+        }
+    </script>
+</body>
+</html>
